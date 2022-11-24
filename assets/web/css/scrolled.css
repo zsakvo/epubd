@@ -1,0 +1,9 @@
+/*
+ * Copyright 2016 Daniel Bateman
+ * All rights reserved.
+ */
+
+html, body {
+    /* Prevent bad CSS from overflowing, causing overscroll errors. */
+    overflow-x: hidden;
+}

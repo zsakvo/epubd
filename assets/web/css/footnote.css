@@ -1,0 +1,38 @@
+/*
+ * Copyright 2016 Daniel Bateman
+ * All rights reserved.
+ */
+
+/*
+ * A margin is applied to footnotes using WebKit margin collapsing:
+ *
+ *  1. The content of the footnote has a collapse setting of 'discard', which
+ *     discards any margin "before" the content. This prevents any top-margin
+ *     set by book CSS from taking effect.
+ *
+ *  2. The body tag has a collapse setting of 'separate' which forces the margin
+ *     set by Lithium to be respected anyway.
+ */
+
+body {
+    border: none !important;
+    padding: 0 !important;
+    margin: 12px 18px 18px 18px !important;
+    background: none !important;
+    -webkit-margin-before-collapse: separate;
+}
+
+:before, :after {
+    display: none
+}
+
+.__Lithium_Footnote_Content {
+    -webkit-margin-before-collapse: discard;
+}
+
+.__Lithium_NoEffects {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+}

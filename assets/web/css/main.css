@@ -1,0 +1,195 @@
+@font-face {
+font-family:"cnepub";
+src:url(res:///opt/sony/ebook/FONT/tt0011m_.ttf), url(res:///tt0011m_.ttf);
+}
+body {
+	padding: 0%;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	margin-left: 1%;
+	margin-right: 1%;
+	line-height:130%;
+	text-align: justify;
+	font-family:"cnepub", serif;
+}
+div {
+	margin:0px;
+	padding:0px;
+	line-height:130%;
+	text-align: justify;
+	font-family:"cnepub", serif;
+}
+p {
+	text-indent: 2em;
+	display:block;
+	text-align : justify;
+	line-height : 1.3em;	
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
+}
+.biaoti {
+	font-size:1.3em;
+	text-indent: 0em;
+	text-align:center;
+	font-weight:bold;
+}
+.biaotileft {
+	font-size:1.3em;
+	text-indent: 0em;
+	font-weight:bold;
+}
+.biaoti-italic {
+	font-size:1.2em;
+	text-indent: 0em;
+	text-align:center;
+	font-weight:bold;
+	font-style:italic;
+}
+.biaoti-big {
+	font-size:1.5em;
+	text-indent: 0em;
+	text-align:center;
+	font-weight:bold;
+}
+.biaoti-all {
+	position:absolute;
+	top:30%;
+	font-size:2em;
+	text-indent:1em;
+	font-weight:bold;
+	font-style:italic;
+	color:goldenrod;
+}
+.biaoti-border {
+	position:absolute;
+	top:32%;
+	left:3%;
+	font-size:2.3em;
+	text-indent:1em;
+	font-weight:bold;
+	font-style:italic;
+	color:wheat;
+}
+.box-1 {
+	border-style:solid;
+	border-color:gold;
+	border-width:1px;
+	background-color:wheat;
+	font-size:0.9em;
+	font-weight:bold;
+	margin:0.2em 1em 0.2em 1em;
+}
+.box-2 {
+	line-height:0;
+}
+.caiye {
+	text-indent: 0em;
+	font-size:1.2em;
+	font-weight:bold;
+}
+.heidi {
+	font-size:1.2em;
+	color:white;
+	background-color:black;
+}
+.zuozhe {
+	font-size:1.2em;
+	text-align:right;
+	font-weight:bold;
+	font-style:italic;
+	margin-right: 1em;
+}
+.red-big {
+	font-size:1.5em;
+	text-indent: 0em;
+	color:red;
+	font-weight:bold;
+}
+.right {
+	text-align:right;
+}
+.juzhong {
+	text-indent: 0em;
+	text-align:center;
+}
+.left {
+	text-indent: 0em;
+}
+.houji {
+	margin-left: 1em;
+	margin-right: 1em;
+}
+.hengxian {
+	text-indent: 0em;
+	line-height: 1%;
+	margin-top: 1px;
+	margin-bottom: 1px;
+}
+.mulu {
+	font-weight:bold;
+	text-indent: 2em;
+}
+.mojin {
+	text-indent:0em;
+	font-weight:bold;
+}
+.floatright {
+	float:right;
+}
+.wenshao {
+	font-size:1.1em;
+	font-weight:bold;
+}
+.zhushi {
+	font-size:0.9em;
+	text-indent: 0em;
+	color:gray;
+}
+.cover {
+	height:100%;
+	padding:0px;
+}
+.center-b {
+	text-align:center;
+	font-weight:bold;
+	text-indent: 0em;
+}
+h1 {
+	line-height:130%;
+	text-align: center;
+	font-weight:bold;
+	font-size:xx-large;
+}
+h2 {
+	line-height:130%;
+	text-align: center;
+	font-weight:bold;
+	font-size:x-large;
+}
+h3 {
+	font-size:1.3em;
+	line-height:130%;
+	text-align: left;
+	text-indent: 0em;
+	font-weight:bold;
+	margin-top: 0.5em;
+	margin-bottom: 1.5em;
+}
+h4 {
+	line-height:130%;
+	text-align: center;
+	font-weight:bold;
+	font-size:medium;
+}
+h5 {
+	line-height:130%;
+	text-align: center;
+	font-weight:bold;
+	font-size:small;
+}
+h6 {
+	line-height:130%;
+	text-align: center;
+	font-weight:bold;
+	font-size:x-small;
+}
