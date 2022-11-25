@@ -1,6 +1,7 @@
 var LithiumApp = {}
 
-LithiumApp.notifySize = notifySize
+LithiumApp.notifySize = LithiumApp.notifySize = (...args) =>
+  window.flutter_inappwebview.callHandler('NotifySize', ...args)
 LithiumApp.onTouchUp = onTouchUp
 LithiumApp.setAnchorPositions = setAnchorPositions
 LithiumApp.setPaperPageMap = setPaperPageMap

@@ -164,9 +164,10 @@ var LithiumJs = (function () {
 
     LithiumApp.notifySize(window.innerWidth, window.innerHeight)
 
-    setupFlow()
+    // setupFlow()
 
     window.onresize = function () {
+      console.log('onResize')
       LithiumApp.notifySize(window.innerWidth, window.innerHeight)
       setupFlow()
     }
@@ -177,7 +178,8 @@ var LithiumJs = (function () {
     // Update the window size after some time to allow layout to take place.
     setTimeout(function () {
       LithiumApp.notifySize(window.innerWidth, window.innerHeight)
-    }, 300)
+      setupFlow()
+    }, 100)
   }
 
   /**
