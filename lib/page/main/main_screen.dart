@@ -15,20 +15,12 @@ class MainScreen extends GetView<MainController> {
     Get.put(MainController());
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0),
-      body: GestureDetector(
-        onHorizontalDragUpdate: controller.onHorizontalDragUpdate,
-        onHorizontalDragEnd: controller.onHorizontalDragEnd,
-        onTapDown: controller.onTapDown,
-        onTapUp: controller.onTapUp,
-        onTapCancel: controller.onTapCancel,
-        //  (details) {
-        //   controller.wController.scrollBy(x: -details.delta.dx.round(), y: 0);
-        // },
-        onTap: () {
-          controller.wController
-              .scrollBy(x: Get.width.round(), y: 0, animated: true);
-        },
+      body: Listener(
+        onPointerMove: controller.onPointerMove,
+        onPointerDown: controller.onPointerDown,
+        onPointerUp: controller.onPointerUp,
         child: InAppWebView(
+          key: controller.webViewKey,
           onWebViewCreated: controller.onWebViewCreated,
           initialFile: "assets/web/chapter.html",
           initialSettings: InAppWebViewSettings(
@@ -38,10 +30,6 @@ class MainScreen extends GetView<MainController> {
               disableHorizontalScroll: true,
               disableVerticalScroll: true),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: controller.onFabTap,
-        child: const Icon(Icons.arrow_downward_sharp),
       ),
     );
   }

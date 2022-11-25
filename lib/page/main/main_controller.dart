@@ -11,6 +11,7 @@ class MainController extends GetxController {
   double tapDownPos = 0.0;
   double tapUpPos = 0.0;
   late int pageWidth;
+  final webViewKey = GlobalKey();
   onWebViewCreated(InAppWebViewController webViewController) {
     wController = webViewController;
     webViewController.addJavaScriptHandler(
@@ -92,6 +93,25 @@ class MainController extends GetxController {
       page++;
     } else {
       page--;
+    }
+    wController.scrollTo(x: (pageWidth * page).round(), y: 0, animated: true);
+  }
+
+  onPointerMove(PointerMoveEvent event) {
+    wController.scrollBy(x: (-event.delta.dx * Get.pixelRatio).round(), y: 0);
+  }
+
+  onPointerDown(PointerDownEvent event) {
+    tapDownPos = event.position.dx;
+  }
+
+  onPointerUp(PointerUpEvent event) {
+    tapUpPos = event.position.dx;
+    double res = tapUpPos - tapDownPos;
+    if (res < 0) {
+      page++;
+    } else {
+      if (page >= 1) page--;
     }
     wController.scrollTo(x: (pageWidth * page).round(), y: 0, animated: true);
   }
