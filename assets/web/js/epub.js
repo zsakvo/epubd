@@ -179,7 +179,7 @@ var LithiumJs = (function () {
     setTimeout(function () {
       LithiumApp.notifySize(window.innerWidth, window.innerHeight)
       setupFlow()
-    }, 100)
+    }, 300)
   }
 
   /**

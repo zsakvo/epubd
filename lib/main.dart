@@ -1,7 +1,12 @@
+import 'package:epub_d/log.dart';
 import 'package:epub_d/page/main/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:loggy/loggy.dart';
 
 void main() {
+  Loggy.initLoggy(
+    logPrinter: const PrettyPrinter(),
+  );
   runApp(const MyApp());
 }
 

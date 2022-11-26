@@ -38,6 +38,7 @@ dependencies:
   get: ^4.6.5
   webview_flutter: ^3.0.4
   flutter_inappwebview: ^6.0.0-beta.16
+  loggy: ^2.0.3
 
 dev_dependencies:
   flutter_test:

@@ -16,15 +16,22 @@ class MainScreen extends GetView<MainController> {
     return Scaffold(
       appBar: AppBar(toolbarHeight: 0),
       body: Listener(
+        behavior: HitTestBehavior.translucent,
         onPointerMove: controller.onPointerMove,
         onPointerDown: controller.onPointerDown,
         onPointerUp: controller.onPointerUp,
         child: InAppWebView(
           key: controller.webViewKey,
+          onWindowFocus: controller.onWindowFocus,
           onWebViewCreated: controller.onWebViewCreated,
           initialFile: "assets/web/chapter.html",
+          gestureRecognizers: {
+            Factory<OneSequenceGestureRecognizer>(
+              () => LongPressGestureRecognizer(),
+            )
+          },
           initialSettings: InAppWebViewSettings(
-              pageZoom: Get.pixelRatio,
+              pageZoom: 1,
               verticalScrollBarEnabled: false,
               horizontalScrollBarEnabled: false,
               disableHorizontalScroll: true,

@@ -1,7 +1,10 @@
+import 'package:epub_d/log.dart';
+import 'package:epub_d/page/main/js_bridge.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
+import 'package:loggy/loggy.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MainController extends GetxController {
@@ -10,95 +13,43 @@ class MainController extends GetxController {
   final x = Get.width.obs;
   double tapDownPos = 0.0;
   double tapUpPos = 0.0;
-  late int pageWidth;
+  int pageWidth = 0;
+  final distance = 40;
   final webViewKey = GlobalKey();
+  final gestureListener = true.obs;
+  late double mDensityFixedWidth = Get.pixelRatio;
+  late double mDensityFixedHeight = Get.pixelRatio;
+
   onWebViewCreated(InAppWebViewController webViewController) {
     wController = webViewController;
-    webViewController.addJavaScriptHandler(
-        handlerName: "NotifySize",
-        callback: (params) {
-          print("notifySize");
-          print(params.toString());
-          pageWidth = (Get.pixelRatio * params[0]).round();
-        });
-//     webViewController.evaluateJavascript(source: """
-// LithiumApp.notifySize = NotifySize
-// """);
-    // webViewController.loadFlutterAsset("assets/web/chapter.html");
+    initJsBridge(webViewController, setPageWidth, setObserveSwipe);
   }
 
-  onPageFinished(String url) {
-//     wController.runJavascript("""
-
-// """);
+  setPageWidth(params) {
+    pageWidth = ((GetPlatform.isIOS ? 1 : Get.pixelRatio) * params[0]).round();
+    final double notifyWidth = params[0] * 1.0;
+    final double notifyHeight = params[1] * 1.0;
+    final double mContentScaleX =
+        notifyWidth / webViewKey.currentContext!.size!.width;
+    final double mContentScaleY =
+        notifyHeight / webViewKey.currentContext!.size!.height;
+    mDensityFixedWidth = mContentScaleX * Get.pixelRatio;
+    mDensityFixedHeight = mContentScaleY * Get.pixelRatio;
   }
 
-  // JavascriptChannel jsBridgeJavascriptChannel() {
-  //   return JavascriptChannel(
-  //       name: 'JSBridge',
-  //       onMessageReceived: (JavascriptMessage message) {
-  //         print(message.message);
-  //         onTap();
-  //       });
-  // }
-
-  // onTap() {
-  //   wController.scrollBy(393, 0);
-  // }
-
-  onFabTap() {
-    // print(Get.width);
-    // print(Get.pixelRatio);
-    page++;
-    // print((Get.width * Get.pixelRatio * page).round());
-    wController.scrollTo(x: (pageWidth * page).round(), y: 0, animated: true);
-//     wController.runJavascript("""
-// document.body.sty
-// """);
+  setObserveSwipe(bool b) {
+    gestureListener.value = b;
   }
 
-  onContentSizeChanged(
-      InAppWebViewController controller, Size newSize, Size oldSize) {
-    print(oldSize.toString());
-    print(newSize.toString());
-    x.value = newSize.width;
-  }
-
-  onHorizontalDragUpdate(DragUpdateDetails details) {
-    // print(details.globalPosition);
-    tapUpPos = details.globalPosition.dx;
-    wController.scrollBy(x: (-details.delta.dx * Get.pixelRatio).round(), y: 0);
-  }
-
-  onTapDown(TapDownDetails details) {
-    print(details.toString());
-    print(details.globalPosition);
-    tapDownPos = details.globalPosition.dx;
-  }
-
-  onTapUp(TapUpDetails details) {
-    print(details.toString());
-  }
-
-  onTapCancel() {
-    print("cancel");
-  }
-
-  onHorizontalDragEnd(DragEndDetails details) {
-    // print(details.primaryVelocity);
-    double res = tapUpPos - tapDownPos;
-    print("onHorizontalDragEnd");
-    print(res);
-    if (res < 0) {
-      page++;
-    } else {
-      page--;
-    }
-    wController.scrollTo(x: (pageWidth * page).round(), y: 0, animated: true);
-  }
+  onWindowFocus(InAppWebViewController webViewController) {}
 
   onPointerMove(PointerMoveEvent event) {
-    wController.scrollBy(x: (-event.delta.dx * Get.pixelRatio).round(), y: 0);
+    if (gestureListener.value) {
+      wController.scrollBy(
+          x: (-event.delta.dx * (GetPlatform.isIOS ? 1 : Get.pixelRatio))
+              .round(),
+          y: 0);
+    }
   }
 
   onPointerDown(PointerDownEvent event) {
@@ -108,10 +59,9 @@ class MainController extends GetxController {
   onPointerUp(PointerUpEvent event) {
     tapUpPos = event.position.dx;
     double res = tapUpPos - tapDownPos;
-    if (res < 0) {
-      page++;
-    } else {
-      if (page >= 1) page--;
+    double resAbs = res.abs();
+    if (resAbs > distance) {
+      res < 0 ? page++ : page--;
     }
     wController.scrollTo(x: (pageWidth * page).round(), y: 0, animated: true);
   }
